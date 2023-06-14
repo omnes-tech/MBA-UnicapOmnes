@@ -89,7 +89,9 @@ abstract contract ERC721 {
         require(to != address(0), "INVALID_RECIPIENT");
 
         require(
-            msg.sender == from || isApprovedForAll[from][msg.sender] || msg.sender == getApproved[id],
+            msg.sender == from ||
+                isApprovedForAll[from][msg.sender] ||
+                msg.sender == getApproved[id],
             "NOT_AUTHORIZED"
         );
 

@@ -1,13 +1,13 @@
 import "@nomicfoundation/hardhat-toolbox";
 import "@nomiclabs/hardhat-etherscan";
 import "@openzeppelin/hardhat-upgrades";
-import { config as dotenvConfig } from "dotenv";
 import "@typechain/hardhat";
+import { config as dotenvConfig } from "dotenv";
 import "hardhat-gas-reporter";
 import { HardhatUserConfig } from "hardhat/config";
 import { NetworkUserConfig } from "hardhat/types";
-import "solidity-coverage";
 import { resolve } from "path";
+import "solidity-coverage";
 
 //https://hardhat.org/guides/create-task.html
 import "./scripts/accounts";
@@ -34,9 +34,10 @@ const chainIds = {
   hardhat: 31337,
   mainnet: 1,
   // "optimism-mainnet": 10,
-  // "polygon-mainnet": 137,
-  // "polygon-mumbai": 80001,
-  rinkeby: 4,
+  "polygon-mainnet": 137,
+  "polygon-mumbai": 80001,
+  sepolia: 11155111,
+  goerli: 1,
 };
 
 function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {
@@ -83,7 +84,8 @@ const config: HardhatUserConfig = {
       optimisticEthereum: process.env.OPTIMISM_API_KEY || "",
       polygon: process.env.POLYGONSCAN_API_KEY || "",
       polygonMumbai: process.env.POLYGONSCAN_API_KEY || "",
-      rinkeby: process.env.ETHERSCAN_API_KEY || "",
+      sepolia: process.env.ETHERSCAN_API_KEY || "",
+      goerli: process.env.ETHERSCAN_API_KEY || "",
     },
   },
 
@@ -106,7 +108,7 @@ const config: HardhatUserConfig = {
       chainId: chainIds.hardhat,
     },
     truffle: {
-      url: 'http://localhost:24012/rpc',
+      url: "http://localhost:24012/rpc",
       timeout: 60000,
       gasMultiplier: DEFAULT_GAS_MULTIPLIER,
     },
@@ -115,9 +117,10 @@ const config: HardhatUserConfig = {
     // bsc: getChainConfig("bsc"),
     mainnet: getChainConfig("mainnet"),
     // optimism: getChainConfig("optimism-mainnet"),
-    // "polygon-mainnet": getChainConfig("polygon-mainnet"),
-    // "polygon-mumbai": getChainConfig("polygon-mumbai"),
-    rinkeby: getChainConfig("rinkeby"),
+    "polygon-mainnet": getChainConfig("polygon-mainnet"),
+    "polygon-mumbai": getChainConfig("polygon-mumbai"),
+    goerli: getChainConfig("goerli"),
+    sepolia: getChainConfig("sepolia"),
   },
   paths: {
     artifacts: "./artifacts",

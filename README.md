@@ -83,7 +83,7 @@ truffle dashboard
 ```
 
 - Use Truffle ppara deployar e verificar seus contratos sem necessidade de inserir suas chaves privadas:
-(obs. o truffle dashboard precisa estar executado)
+  (obs. o truffle dashboard precisa estar executado)
 
 ```bash
 yarn deploy:truffle
@@ -100,9 +100,6 @@ yarn hardhat verify --network truffle 0xCF00fd269fE5Ad09E0907b96AfeeD7e04F8423C6
 yarn prettier
 ```
 
-
-
 ### Notes
 
 Fiz um conjunto de implementações para ficar mais fácil o uso de diversos frameworks necessários para iniciar qualquer projeto.
-

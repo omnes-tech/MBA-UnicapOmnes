@@ -1,11 +1,9 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  
-    const IPFS = "https://ipfs.io/ipfs/CID.json";
-    const nome = "Afonso";
-    const symbol ="henrique"
-
+  const IPFS = "https://ipfs.io/ipfs/CID.json";
+  const nome = "Afonso";
+  const symbol = "henrique";
 
   const NFT = await ethers.getContractFactory("NFT");
   const nft = await NFT.deploy(nome, symbol, IPFS);

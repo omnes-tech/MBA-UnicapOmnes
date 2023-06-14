@@ -2,7 +2,7 @@
 pragma solidity >=0.8.15;
 
 import "./solmate/ERC721.sol";
-import {Strings} from "./openzeppelin/Strings.sol";
+import { Strings } from "./openzeppelin/Strings.sol";
 import "./openzeppelin/Ownable.sol";
 import "./openzeppelin/Context.sol";
 
@@ -12,7 +12,6 @@ error NonExistentTokenURI();
 error WithdrawTransfer();
 
 contract NFT is ERC721, Ownable {
-
     using Strings for uint256;
     string public baseURI;
     uint256 public currentTokenId;
@@ -39,25 +38,17 @@ contract NFT is ERC721, Ownable {
         return newTokenId;
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        virtual
-        override
-        returns (string memory)
-    {
+    function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         if (ownerOf(tokenId) == address(0)) {
             revert NonExistentTokenURI();
         }
         return
-            bytes(baseURI).length > 0
-                ? string(abi.encodePacked(baseURI, tokenId.toString()))
-                : "";
+            bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : "";
     }
 
     function withdrawPayments(address payable payee) external onlyOwner {
         uint256 balance = address(this).balance;
-        (bool transferTx, ) = payee.call{value: balance}("");
+        (bool transferTx, ) = payee.call{ value: balance }("");
         if (!transferTx) {
             revert WithdrawTransfer();
         }
