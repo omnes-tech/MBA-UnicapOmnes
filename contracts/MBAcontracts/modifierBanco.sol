@@ -7,15 +7,13 @@ contract BancoModificadores{
 //variáveis globais e estáveis
 address public donoContrato;
 uint public valorMinDeposito = 1 ether;
-uint public limiteSaque = 2 ether; //colocar em ether
 bool public pause;
 
-mapping(address => uint256) Saques;
-mapping(address => uint256) Saldo;
+mapping(address => uint256) public Saldo;
 mapping(address => bool) SaiudoBC3W;
 
 constructor() {
-    donoContrato = msg.sender;
+    donoContrato = msg.sender; //0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
 }
 
 function depositar()external payable Pausado BCbaniu{
@@ -33,11 +31,9 @@ function depositar()external payable Pausado BCbaniu{
 receive() external payable{
 }
 
-
-function saqueCliente() external payable LimiteSaque Pausado{
-    require(msg.value <= Saldo[msg.sender], "ta querendo mais?? Pode nao");
-    Saldo[msg.sender] -= msg.value;
-    payable(msg.sender).transfer(msg.value);
+//vai retirar o valor todo que está no contrato
+function RetirarValorDonoBanco() external payable Pausado SomenteDono{
+    payable(msg.sender).transfer(address(this).balance);
 }
 
 function SairdoBanco() external payable Pausado{
@@ -52,18 +48,13 @@ function pausarDespausar(bool _booliana)external SomenteDono {
 }
 
 
-modifier LimiteSaque(){
-require(msg.value <= limiteSaque, "nao pode sacar mais de 2 ether");
-_;
-}
-
 modifier SomenteDono(){
 require(msg.sender == donoContrato, "voce nao e o Dono");
 _;
 }
 
 modifier Pausado(){
-    require(!pause, "contrato pausado"); //se não for falso
+    require(!pause, "contrato pausado"); //se não for falso -- si ne qua non
     _;
 }
 

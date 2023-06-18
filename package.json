@@ -67,11 +67,15 @@
     "prepublishOnly": "pinst --disable",
     "deploy:truffle": "yarn hardhat run scripts/deploy.ts --network truffle",
     "deploy:NFT": "yarn hardhat run scripts/deployNFT.ts --network truffle",
+    "deploy:job": "yarn hardhat run scripts/deployJob.ts --network truffle",
     "prettier": "prettier --config ./.prettierrc.yml --write \"**/*.{js,json,md,sol,ts,yaml,yml,test.ts}\"",
     "prettier:check": "prettier --check --config ./.prettierrc.yml \"**/*.{js,json,md,sol,ts,yaml,yml}\""
   },
   "dependencies": {
+    "@babel/parser": "^7.22.5",
+    "@openzeppelin/contracts": "^4.9.1",
     "@rari-capital/solmate": "^6.4.0",
+    "erc721a": "^4.2.3",
     "truffle": "^5.5.25"
   }
 }

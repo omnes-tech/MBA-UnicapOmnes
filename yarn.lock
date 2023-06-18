@@ -277,6 +277,11 @@
   resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.18.11.tgz"
   integrity sha512-9JKn5vN+hDt0Hdqn1PiJ2guflwP+B6Ga8qbDuoF0PzzVhrzsKIJo8yGqVk6CmMHiMei9w1C1Bp9IMJSIK+HPIQ==
 
+"@babel/parser@^7.22.5":
+  version "7.22.5"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.22.5.tgz#721fd042f3ce1896238cf1b341c77eb7dee7dbea"
+  integrity sha512-DFZMC9LJUG9PLOclRC32G63UXwzqS2koQC8dkx+PLdmt1xSePYpbT/NbsrJy8Q/muXz7o/h/d4A7Fuyixm559Q==
+
 "@babel/runtime@^7.6.3", "@babel/runtime@^7.9.2":
   version "7.18.9"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.18.9.tgz"
@@ -1194,6 +1199,11 @@
   version "4.7.3"
   resolved "https://registry.npmjs.org/@openzeppelin/contracts-upgradeable/-/contracts-upgradeable-4.7.3.tgz"
   integrity sha512-+wuegAMaLcZnLCJIvrVUDzA9z/Wp93f0Dla/4jJvIhijRrPabjQbZe6fWiECLaJyfn5ci9fqf9vTw3xpQOad2A==
+
+"@openzeppelin/contracts@^4.9.1":
+  version "4.9.1"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.9.1.tgz#afa804d2c68398704b0175acc94d91a54f203645"
+  integrity sha512-aLDTLu/If1qYIFW5g4ZibuQaUsFGWQPBq1mZKp/txaebUnGHDmmiBhRLY1tDNedN0m+fJtKZ1zAODS9Yk+V6uA==
 
 "@openzeppelin/hardhat-upgrades@^1.19.1":
   version "1.20.0"
@@ -4195,6 +4205,11 @@ env-paths@^2.2.0, env-paths@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-2.2.1.tgz#420399d416ce1fbe9bc0a07c62fa68d67fd0f8f2"
   integrity sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==
+
+erc721a@^4.2.3:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/erc721a/-/erc721a-4.2.3.tgz#ca6469b0e54afb0f614272c2147dc4cb49ff223f"
+  integrity sha512-0deF0hOOK1XI1Vxv3NKDh2E9sgzRlENuOoexjXRJIRfYCsLlqi9ejl2RF6Wcd9HfH0ldqC03wleQ2WDjxoOUvA==
 
 errno@~0.1.1:
   version "0.1.8"

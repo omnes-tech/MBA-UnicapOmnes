@@ -1,0 +1,26 @@
+{
+  "name": "Octopus Omnes Job",
+  "image": "https://bafybeibqrg4fkeyjppeui76pgyn3bvzhw2gi5tegrmazsuh3wrrgaqyveq.ipfs.nftstorage.link",
+  "attributes": [
+    {
+      "trait_type": "Species",
+      "value": "Octopus"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Hacker"
+    },
+    {
+      "trait_type": "Special Omnes Protocol",
+      "value": ""
+    },
+    {
+      "trait_type": "Body",
+      "value": "Job Tentacles"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Blue"
+    }
+  ]
+}

@@ -37,7 +37,7 @@ const chainIds = {
   "polygon-mainnet": 137,
   "polygon-mumbai": 80001,
   sepolia: 11155111,
-  goerli: 1,
+  goerli: 5,
 };
 
 function getChainConfig(chain: keyof typeof chainIds): NetworkUserConfig {

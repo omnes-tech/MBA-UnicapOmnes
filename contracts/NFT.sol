@@ -12,12 +12,15 @@ error NonExistentTokenURI();
 error WithdrawTransfer();
 
 contract NFT is ERC721, Ownable {
+
+    
     using Strings for uint256;
     string public baseURI;
     uint256 public currentTokenId;
     uint256 public constant TOTAL_SUPPLY = 10_000;
-    uint256 public constant MINT_PRICE = 0.08 ether;
-
+    
+    uint256 public price;
+    uint256 public maxDiscount;
     constructor(
         string memory _name,
         string memory _symbol,
@@ -27,7 +30,7 @@ contract NFT is ERC721, Ownable {
     }
 
     function mintTo(address recipient) public payable returns (uint256) {
-        if (msg.value != MINT_PRICE) {
+        if (msg.value != price) {
             revert MintPriceNotPaid();
         }
         uint256 newTokenId = ++currentTokenId;
@@ -45,6 +48,15 @@ contract NFT is ERC721, Ownable {
         return
             bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : "";
     }
+
+    function setPrices(uint256 _price) external onlyOwner{
+        price = _price;
+    }
+
+    function setMaxdiscont(uint256 _maxDiscont)external onlyOwner{
+        maxDiscount = _maxDiscont;
+    }
+
 
     function withdrawPayments(address payable payee) external onlyOwner {
         uint256 balance = address(this).balance;

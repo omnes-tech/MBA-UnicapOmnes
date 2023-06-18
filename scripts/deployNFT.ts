@@ -1,16 +1,16 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const IPFS = "https://ipfs.io/ipfs/CID.json";
-  const nome = "Afonso";
-  const symbol = "henrique";
+  const IPFS = "https://bafkreig2xnzfhpgdqgz4tnsgzdx2y6svimng3a7h76mr2dnxs7ieihuwqy.ipfs.nftstorage.link";
+  const nome = "Omnes Octopus";
+  const symbol = "OMNESCTO";
 
   const NFT = await ethers.getContractFactory("NFT");
   const nft = await NFT.deploy(nome, symbol, IPFS);
 
   await nft.deployed();
 
-  console.log("Lock with 1 ETH deployed to:", nft.address);
+  console.log("NFT deployed to:", nft.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

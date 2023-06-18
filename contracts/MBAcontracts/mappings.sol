@@ -17,7 +17,7 @@ contract NovaTurmaMapping{
     mapping(address => bool) public presenca;
 
     //definindo estrutura que vai indicar outro mapping de um endereço que definem um numero
-    mapping(address => mapping(address => uint)) NotaProfAluno;
+    mapping(address => mapping(address => uint)) public NotaProfAluno;
 
     //Atualizando o nosso dicionário
     function setarPalavrasAoDicio(string memory _palavra, string memory _significado) external {
