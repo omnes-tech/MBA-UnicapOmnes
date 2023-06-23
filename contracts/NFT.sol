@@ -15,6 +15,7 @@ contract NFT is ERC721, Ownable {
 
     
     using Strings for uint256;
+    string public generalURI;
     string public baseURI;
     uint256 public currentTokenId;
     uint256 public constant TOTAL_SUPPLY = 10_000;
@@ -24,13 +25,12 @@ contract NFT is ERC721, Ownable {
     constructor(
         string memory _name,
         string memory _symbol,
-        string memory _baseURI
+        string memory _generalURI
     ) ERC721(_name, _symbol) {
-        baseURI = _baseURI;
-    }
+        generalURI = _generalURI;   }
 
     function mintTo(address recipient) public payable returns (uint256) {
-        if (msg.value != price) {
+        if (msg.value >= price-((price*maxDiscount)/10000)) {
             revert MintPriceNotPaid();
         }
         uint256 newTokenId = ++currentTokenId;
@@ -46,10 +46,10 @@ contract NFT is ERC721, Ownable {
             revert NonExistentTokenURI();
         }
         return
-            bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : "";
+            bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString())) : generalURI;
     }
 
-    function setPrices(uint256 _price) external onlyOwner{
+    function setPrice(uint256 _price) external onlyOwner{
         price = _price;
     }
 
@@ -57,6 +57,9 @@ contract NFT is ERC721, Ownable {
         maxDiscount = _maxDiscont;
     }
 
+    function setGeneralURI(string memory _generalURI) external onlyOwner{
+        generalURI = _generalURI;
+    }
 
     function withdrawPayments(address payable payee) external onlyOwner {
         uint256 balance = address(this).balance;
