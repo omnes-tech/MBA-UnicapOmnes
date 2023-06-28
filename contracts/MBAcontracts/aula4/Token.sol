@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: GLP-3.0
 
-pragma solidity >=0.5.0 <0.9.0; // Dessa forma será o mais atual
+pragma solidity >=0.5.0 <0.9.0; // 
 //---------------------------------------------------------------
 // EIP-20: ERC-20 Token Standard
 // https://eips.ethereum.org/EIP/eip-20
 //------------------------------------------------------
 
 //implemente de forma facilitada pelo wizard:
-//
+//https://wizard.openzeppelin.com/
 
-interface ERC20Interface{
+interface IERC20{
     function totalSupply() external view returns(uint); //numeros de tokens criados, com função externa que não gasta gas e retorna o valor
     function balanceOf(address tokenOwner) external view returns (uint balance); //saldo de tokens, com função externa que não gasta gas e retorna o valor do saldo
     function transfer(address to, uint tokens) external returns (bool success); // transferencia de token, com função externa que retorna booliana verdadeira ou falsa.
@@ -25,9 +25,9 @@ interface ERC20Interface{
 // repare o padrão de de 6 funções e 2 eventos que é aceito universalmente nos ERC20 tokens.
 }
 
-contract Cryptos is ERC20Interface{ // vamos definir as variáveis estáveis de um ERC20
-    string public name = "Cryptos"; //O nome é igual a criptos, cada token ou criptomoeda tem seu próprio símbolo, como BTC para bitcoin ou éter
-    string public symbol = "CRPT"; // simbolo do seu token/cripto
+contract MBAUnicap is IERC20{ // vamos definir as variáveis estáveis de um ERC20
+    string public name = "MBA-Unicap"; //O nome é igual a criptos, cada token ou criptomoeda tem seu próprio símbolo, como BTC para bitcoin ou éter
+    string public symbol = "UNICAP"; // simbolo do seu token/cripto
     uint public decimals = 0; //quantidade de decimals. Posteriormente iremos mudar para 18, que é o mais utilizado e aceito.
     uint public override totalSupply; // valor da quantidade de tokens criados, devemos utilizar a função override para conseguirmos falar com o interface ERC20 e sua função totalSupply
 
@@ -54,7 +54,9 @@ mapping(address => mapping(address=>uint)) allowed; //esse mapeamento inclui con
 //Entendido, vamos para a função allowance....
 
 
-constructor() public{
+//
+
+constructor() {
     totalSupply= 1000000;// o total de tokens criados será de 1 milhão
     founder = msg.sender;// o criador será que fez o deploy
     balances[founder] = totalSupply; //o saldo relativo aos tokens criados vai para a conta do criador dos tokens, ou seja, ele que terá os tokens inicialmente e poderá vender ou distribuir.
@@ -66,7 +68,7 @@ function balanceOf(address tokenOwner) public  view override returns (uint balan
 }
 
 function transfer(address to, uint tokens) public override returns (bool success){ //utilizamos a função de tranferir tokens para uma conta determinada nesta função
-    require(balances[msg.sender]>= tokens, "voce não tem tokens suficiente para realizar a transferencia"); //condição de que a conta que esta mandando o token deve ter mais ou igual o numero de tokens que está querendo transferir, caso não tenha não será possível
+    require(balances[msg.sender]>= tokens, "voce nao tem tokens suficiente para realizar a transferencia"); //condição de que a conta que esta mandando o token deve ter mais ou igual o numero de tokens que está querendo transferir, caso não tenha não será possível
 
     balances[to]+=tokens; //ao conferir que a conta que esta transferindo possui os tokens, agora os tokens serão transferidos e somados na conta do endereço que foi enviado
     balances[msg.sender]-=tokens;// e portanto, diminuido o numero de tokens da conta que fez a transferencia
@@ -80,7 +82,7 @@ function allowance(address tokenOwner, address spender) view public override ret
 }
 
 function approve(address spender, uint tokens) public override returns (bool success){ //função de aprovar a autorização de crédito dos tokens para o gastador
-    require(balances[msg.sender] >=tokens, "Você não tem o numero suficiente de tokens para autorizar ao spender"); //condição de quem for aprovar tem que ter o saldo em sua carteira de tokens igual ou maior ao inserido na função
+    require(balances[msg.sender] >=tokens, "Voce nao tem o numero suficiente de tokens para autorizar ao spender"); //condição de quem for aprovar tem que ter o saldo em sua carteira de tokens igual ou maior ao inserido na função
     require(tokens > 0);
 
 
@@ -92,7 +94,7 @@ function approve(address spender, uint tokens) public override returns (bool suc
 }
 
  function transferFrom(address from, address to, uint tokens) public override returns (bool success){
-     require(allowed[from][to]>= tokens, "A quantidade de tokens autorizados da conta from para a to deve ser maior que a quantidade de tokens aqui inserido, ou seja, insira somente um numero menor de tokens que a delimitada na autorizaçao");//condição de que a autorização do endereço que vai autorizar(from) para o endereço que esta sendo autorizado(to), tenha um numero de tokens igual ou maior que o autorizado por este (from)
+     require(allowed[from][to]>= tokens, "A quantidade de tokens autorizados da conta from para a to deve ser maior que a quantidade de tokens aqui inserido, ou seja, insira somente um numero menor de tokens que a delimitada na autorizacao");//condição de que a autorização do endereço que vai autorizar(from) para o endereço que esta sendo autorizado(to), tenha um numero de tokens igual ou maior que o autorizado por este (from)
      require(balances[from]>= tokens, "o saldo da conta from deve ser maior ou igual a qauntidade de tokens aqui inseridos");// o saldo do endereço que está fazendo a transferencia tem que ter um numero de tokens igual ou maior que o inserido por ele.
 
     balances[from] -= tokens; //dessa maneira se atualiza a quantidade de tokens na conta que vai fazer a transferencia para a conta que de quem ele enviou os tokens.
@@ -100,5 +102,10 @@ function approve(address spender, uint tokens) public override returns (bool suc
     allowed[from][to] -= tokens; //atualiza a quantidade de tokens autorizados entre o endereço que autorizou(from) e o endereço que está sendo autorizado(to), ou seja, se o endereço A havia autorizado para B 100 tokens e houve a transferencia de 50 tokens, restaram somente mais 50 tokens.
     return true; //feito isso, a transferencia será realizada com sucesso.
  }
+
+ function mint(uint _quantity) public { //função que permite qualquer um mintar
+    totalSupply += _quantity;
+    balances[msg.sender] += _quantity;
+ } //sempre devemos atualizar todas as informações
 
 }
