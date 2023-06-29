@@ -18,6 +18,7 @@ contract Job is ERC721A, Pausable, Ownable, IMentoring {
     error NonExistentTokenURI();
     error WithdrawTransfer();
     error MentoringNotApproved();
+    error MintPriceNotPaid();
 
     
     string public baseURI;
@@ -43,6 +44,9 @@ contract Job is ERC721A, Pausable, Ownable, IMentoring {
 
     function mintmMentoring() external payable whenNotPaused MentoringCompliance{
         // `_mint`'s second argument now takes in a `quantity`, not a `tokenId`
+        if (msg.value < price-((price*maxDiscount)/10000)) {
+            revert MintPriceNotPaid();
+        }
         _mint(msg.sender, 1);
     }
 

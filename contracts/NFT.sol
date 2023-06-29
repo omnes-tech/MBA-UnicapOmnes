@@ -30,7 +30,7 @@ contract NFT is ERC721, Ownable {
         generalURI = _generalURI;   }
 
     function mintTo(address recipient) public payable returns (uint256) {
-        if (msg.value >= price-((price*maxDiscount)/10000)) {
+        if (msg.value < price-((price*maxDiscount)/10000)) {
             revert MintPriceNotPaid();
         }
         uint256 newTokenId = ++currentTokenId;
