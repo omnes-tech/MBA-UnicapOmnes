@@ -46,6 +46,8 @@ library Math {
     }
 
     // me retorne o valor máximo entre os inseridos
+    //A expressão “a > b” é uma condição que verifica se “a” é maior que “b”. Se essa condição for verdadeira, a expressão retorna o valor de “a”, caso contrário, ela retorna o valor de “b”.
+//Então, se “a” for maior que “b”, a expressão retornará o valor de “a”, caso contrário, ela retornará o valor de “b”.
     function max(uint256 a, uint256 b) internal pure returns (uint256) {
         return a > b ? a : b;
     }

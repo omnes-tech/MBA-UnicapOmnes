@@ -58,18 +58,23 @@ contract PartidaFutebol {
         //aprendendo a usar a library:
         uint placarCasa = idPartida[_idPartida].placarCasa;
         uint placarVisitante = idPartida[_idPartida].placarVisitante;
-        uint vencedor = placarCasa.max(placarVisitante);
+        //usamos a library para devolver o valor máximo dos placares
+        uint vencedor = placarCasa.max(placarVisitante); //repare na library que retorna uma uint
 
         //aprendendo a usar o if e else:
-        if(vencedor == idPartida[_idPartida].placarCasa){ //se o placar do vencedor for igual ao da Casa
+        if(vencedor == idPartida[_idPartida].placarCasa){ 
+            //se o placar do vencedor for igual ao da Casa
            bool Casavenceu = idPartida[_idPartida].vencedorCasa = true;
            string memory nomeCasa = idPartida[_idPartida].timeCasa;
+           //atualiza o mapping do time da casa e soma uma vitória
            VitoriasCasa[nomeCasa]++;
            return (vencedor, (idPartida[_idPartida].timeCasa), (Casavenceu));
         } else {
+            //se não for, quer dizer que o time vizitante venceu
             bool Visitantevenceu = idPartida[_idPartida].vencedorVisitante = true;
             string memory nomeVisitante = idPartida[_idPartida].timeVisitante;
-           VitoriasCasa[nomeVisitante]++;
+            //atualiza o mapping do time visitante e soma uma vitória
+           VitoriasVisitantes[nomeVisitante]++;
             return (vencedor,(idPartida[_idPartida].timeCasa), (Visitantevenceu));
         }
         

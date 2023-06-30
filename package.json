@@ -67,6 +67,7 @@
     "prepublishOnly": "pinst --disable",
     "deploy:truffle": "yarn hardhat run scripts/deploy.ts --network truffle",
     "deploy:NFT": "yarn hardhat run scripts/deployNFT.ts --network truffle",
+    "deploy:MBA": "yarn hardhat run scripts/deployMBA.ts --network truffle",
     "deploy:job": "yarn hardhat run scripts/deployJob.ts --network truffle",
     "prettier": "prettier --config ./.prettierrc.yml --write \"**/*.{js,json,md,sol,ts,yaml,yml,test.ts}\"",
     "prettier:check": "prettier --check --config ./.prettierrc.yml \"**/*.{js,json,md,sol,ts,yaml,yml}\""

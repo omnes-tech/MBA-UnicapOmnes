@@ -57,7 +57,7 @@ mapping(address => mapping(address=>uint)) allowed; //esse mapeamento inclui con
 //
 
 constructor() {
-    totalSupply= 1000000;// o total de tokens criados será de 1 milhão
+    totalSupply= 100000000;// o total de tokens criados 
     founder = msg.sender;// o criador será que fez o deploy
     balances[founder] = totalSupply; //o saldo relativo aos tokens criados vai para a conta do criador dos tokens, ou seja, ele que terá os tokens inicialmente e poderá vender ou distribuir.
 

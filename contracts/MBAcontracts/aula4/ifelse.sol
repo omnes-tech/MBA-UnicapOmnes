@@ -31,13 +31,13 @@ contract sentencia_if{
         string memory mensaje;
         
         if(keccak256(abi.encodePacked(_candidato))==keccak256(abi.encodePacked("Joao"))){
-            mensaje = "Quem votou correctamente foi o Joao";
+            mensaje = "Quem votou corretamente foi o Joao";
         }else{
             if(keccak256(abi.encodePacked(_candidato))==keccak256(abi.encodePacked("Gabriela"))){
-                mensaje = "Quem votou correctamente foi a Gabriel";
+                mensaje = "Quem votou corretamente foi a Gabriel";
             }else{
                 if(keccak256(abi.encodePacked(_candidato))==keccak256(abi.encodePacked("Maria"))){
-                    mensaje = "Quem votou correctamente foi a Maria";
+                    mensaje = "Quem votou corretamente foi a Maria";
                 }else{
                     mensaje = "Quem votou nao esta na lista";
                 }

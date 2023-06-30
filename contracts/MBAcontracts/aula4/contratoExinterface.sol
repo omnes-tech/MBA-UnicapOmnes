@@ -11,6 +11,8 @@ contract ContratoPrincipal is ContratoInterface, Dados{
 
     uint valordepositado;
 
+    //FUNÇÕES OBRIGATÓRIAS PARA REALIZAR A SUBISTITUIÇÃO DA INTERFACE =>
+
     //podemos importar as definições da interface no contrato principal assim armazenando todos os dados nesse contrato
     function depositar(uint256 valor) external override(ContratoInterface){
         valordepositado += valor;
@@ -27,9 +29,9 @@ contract ContratoPrincipal is ContratoInterface, Dados{
         valordepositado -= valor;
     }
 
-    
+    ///A FUNÇÃO ABAIXO É DEMONSTRAÇÃO DE INTERAÇÃO COM O ABSTRATO
 
-    //abstrato -- não conseguimos modificar nada no contrato abstrato
+    //abstrato -- Exmplo de que não conseguimos modificar nada no contrato abstrato por esse contrato
 
     function setarIdadenoAbstrato(uint256 _idade)external {
         dados.setarIdade(_idade);

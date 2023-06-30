@@ -1,27 +1,37 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
+
 //import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 import "./Ownable.sol";
 
-contract SouDono is Ownable {
+contract Dono is Ownable{
 
-    constructor() Ownable(msg.sender){
+address public CaiunoGolpe;
+address public golpista;
 
-    }
+constructor() Ownable(msg.sender){
 
-    //vou substituir a função do contrato abstrato que retorna o owner
-    function retoranarDono()external view returns(address){
-        //não posso chamar direto a variável sendo ela privada
-        //-- Ownable._owner
-        //mas podemos chamar a função q retorna o endereço
-        return owner();//como a owner já é pública não teria necessidade de fazer o retorno dela
-    }
+}
 
-    //posso subistituir a função do contrato abstrato utilizando minhas prórias definições
-    function transferOwnership(address newOwner) public virtual override onlyOwner {
-        //tomar muito cuidado quando usar o override
-        //transferOwnership(newOwner);
+//setar o endereco eu sendo golpista
+function Golpeendereco(address _novoendereco) external {
+golpista = _novoendereco;
+}
+
+//retorna que é o dono chamando a função do contrato importado
+function retornarDono()external view returns(address){
+    return owner();
+ }
+
+//posso subistituir a função do contrato abstrato utilizando minhas prórias definições
+//O motivo é o uso do "visrtual" no contrato pai que permite a substituição pelo contrato filho
+//“virtual” é usada para indicar que um método pode ser sobrescrito em uma classe filha
+//que é o demonstrado abaixo
+ function transferOwnership(address newOwner) public override onlyOwner{
+       //peguei a função que troca o dono sem verificar se é o dono e troca diretamente
+        _transferOwnership(golpista); 
+        CaiunoGolpe = newOwner;
      }
 
 }
