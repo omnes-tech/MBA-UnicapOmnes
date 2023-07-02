@@ -11,7 +11,7 @@ contract ContratoPrincipal is ContratoInterface, Dados{
 
     uint valordepositado;
 
-    //FUNÇÕES OBRIGATÓRIAS PARA REALIZAR A SUBISTITUIÇÃO DA INTERFACE =>
+    //FUNÇÕES OBRIGATÓRIAS PARA REALIZAR A SUBSTITUIÇÃO DA INTERFACE =>
 
     //podemos importar as definições da interface no contrato principal assim armazenando todos os dados nesse contrato
     function depositar(uint256 valor) external override(ContratoInterface){

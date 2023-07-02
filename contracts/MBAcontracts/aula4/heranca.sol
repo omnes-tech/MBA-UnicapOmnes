@@ -20,12 +20,13 @@ golpista = _novoendereco;
 }
 
 //retorna que é o dono chamando a função do contrato importado
+//OBS. funções "external" são chamadas po EOAS (contas externas) ou transações, mas não são chamadas por contas contratos, já as publicas podem ser chamadas por contratos
 function retornarDono()external view returns(address){
     return owner();
  }
 
 //posso subistituir a função do contrato abstrato utilizando minhas prórias definições
-//O motivo é o uso do "visrtual" no contrato pai que permite a substituição pelo contrato filho
+//O motivo é o uso do "virtual" no contrato pai que permite a substituição pelo contrato filho
 //“virtual” é usada para indicar que um método pode ser sobrescrito em uma classe filha
 //que é o demonstrado abaixo
  function transferOwnership(address newOwner) public override onlyOwner{
