@@ -101,10 +101,11 @@
     }
 
     function mint(uint256 _mintAmount) public payable publicSaleIsActive {
-        require(msg.value == price * _mintAmount, "Incorrect Ether value sent");
-        if (msg.value < price * _mintAmount-(((price* _mintAmount)* maxDiscount)/10000)) {
-        revert MintPriceNotPaid();}
         require(_numberMinted(msg.sender) + _mintAmount <= maxMintAmount, "Mint amount exceeds max limit per wallet");
+        if (msg.value < price * _mintAmount-(((price* _mintAmount)* maxDiscount)/10000)) {
+        revert MintPriceNotPaid();} else{
+        require(msg.value >= price * _mintAmount - ((price* _mintAmount)* maxDiscount)/10000, "Incorrect Ether value sent");
+         }
         _customMint(msg.sender, _mintAmount);
     }
 
@@ -172,7 +173,7 @@
 
     //omnes protocol
 
-    function setPrice(uint256 _price) external onlyOwner{
+    function setprice(uint256 _price)external onlyOwner{
         price = _price;
     }
 
