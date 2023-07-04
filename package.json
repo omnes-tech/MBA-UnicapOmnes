@@ -12,7 +12,7 @@
     "@nomicfoundation/hardhat-toolbox": "^1.0.1",
     "@nomiclabs/hardhat-ethers": "^2.1.0",
     "@nomiclabs/hardhat-etherscan": "^3.1.0",
-    "@openzeppelin/contracts-upgradeable": "^4.7.2",
+    "@openzeppelin/contracts-upgradeable": "^4.9.2",
     "@openzeppelin/hardhat-upgrades": "^1.19.1",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@typechain/ethers-v5": "^10.1.0",
@@ -69,6 +69,7 @@
     "deploy:NFT": "yarn hardhat run scripts/deployNFT.ts --network truffle",
     "deploy:MBA": "yarn hardhat run scripts/deployMBA.ts --network truffle",
     "deploy:job": "yarn hardhat run scripts/deployJob.ts --network truffle",
+    "deploy:Genesys": "yarn hardhat run scripts/deployGenesys.ts --network truffle",
     "prettier": "prettier --config ./.prettierrc.yml --write \"**/*.{js,json,md,sol,ts,yaml,yml,test.ts}\"",
     "prettier:check": "prettier --check --config ./.prettierrc.yml \"**/*.{js,json,md,sol,ts,yaml,yml}\""
   },

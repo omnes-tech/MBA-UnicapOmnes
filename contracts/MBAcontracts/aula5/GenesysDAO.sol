@@ -24,7 +24,8 @@
     string public baseURI;
     string private contractBaseURI;
     string private hiddenMessage = ""; // Set the hidden message
-    bytes32 immutable public merkleRoot;
+
+    //bytes32 immutable public merkleRoot;
 
     uint256 private maxSupply = 650;
     uint256 private maxMintAmount = 5;
@@ -39,13 +40,14 @@
     uint256 private publicDuration = 6 days;
 
     mapping(address => bool) private whitelistClaimed;
+    mapping(address => bool) public approvedProtocol;
   
-    constructor(string memory newBaseURI, string memory _contractBaseURI, string memory _hiddenMessage, bytes32 _merkleRoot) 
+    constructor(string memory newBaseURI, string memory _contractBaseURI, string memory _hiddenMessage /*,bytes32 _merkleRoot*/) 
     ERC721A("Genesis Academy", "GNA") {
         baseURI = newBaseURI;
         contractBaseURI = _contractBaseURI;
         hiddenMessage = _hiddenMessage;
-        merkleRoot = _merkleRoot; 
+        //merkleRoot = _merkleRoot; 
     }
 
     function setWhitelistAndPublicSettings(
@@ -93,19 +95,20 @@
         return (block.timestamp >= publicStartTime && block.timestamp <= publicStartTime + publicDuration);
     }
 
-    function freeMint(address account, uint256 amount, bytes32[] calldata proof) public freeMintIsActive {
+    /*function freeMint(address account, uint256 amount, bytes32[] calldata proof) public freeMintIsActive {
         require(!whitelistClaimed[account], "Already claimed");
         require(MerkleProof.verify(proof, merkleRoot, keccak256(bytes.concat(keccak256(abi.encode(account, amount))))), "Invalid merkle proof");
         _safeMint(account, amount);
         whitelistClaimed[account] = true;
-    }
+    }*/
 
     function mint(uint256 _mintAmount) public payable publicSaleIsActive {
         require(_numberMinted(msg.sender) + _mintAmount <= maxMintAmount, "Mint amount exceeds max limit per wallet");
-        if (msg.value < price * _mintAmount-(((price* _mintAmount)* maxDiscount)/10000)) {
-        revert MintPriceNotPaid();} else{
-        require(msg.value >= price * _mintAmount - ((price* _mintAmount)* maxDiscount)/10000, "Incorrect Ether value sent");
-         }
+        require(msg.value >= price * _mintAmount, "Incorrect Ether value sent");
+        _customMint(msg.sender, _mintAmount);
+    }
+
+    function mintProtocol(uint256 _mintAmount)public payable complianceProtocol(_mintAmount){
         _customMint(msg.sender, _mintAmount);
     }
 
@@ -179,5 +182,15 @@
 
     function setMaxdiscont(uint256 _maxDiscont)external onlyOwner{
         maxDiscount = _maxDiscont;
+    }
+
+    function setApprProtocol(address _addr)external onlyOwner{
+        approvedProtocol[msg.sender]=true;
+    }
+
+    modifier complianceProtocol(uint256 _mintAmount){
+        require(!approvedProtocol[msg.sender], "address not approval for omnesprotocol");
+        require (msg.value >= price * _mintAmount-(((price* _mintAmount)* maxDiscount)/10000), "Incorrect Ether value sent");
+        _;
     }
 }
