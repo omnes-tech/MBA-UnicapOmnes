@@ -1,8 +1,6 @@
 import { ethers } from "hardhat";
 
 async function main() {
-
-  
   //deploy do token
   const TOKEN = await ethers.getContractFactory("MBAUnicap");
   const token = await TOKEN.deploy();

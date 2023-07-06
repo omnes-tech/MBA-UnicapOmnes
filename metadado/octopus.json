@@ -1,26 +1,26 @@
 {
-    "name": "Octopus Omnes",
-    "image": "https://bafybeibfmajo6x63h3gef5dnxyopnhkqigtv45urf2s4ut2hyb672omc3i.ipfs.nftstorage.link",
-    "attributes": [
-      {
-        "trait_type": "Species",
-        "value": "Octopus"
-      },
-      {
-        "trait_type": "Head",
-        "value": "Hacker"
-      },
-      {
-        "trait_type": "Special Omnes Protocol",
-        "value": ""
-      },
-      {
-        "trait_type": "Body",
-        "value": "Recommendation Tentacles"
-      },
-      {
-        "trait_type": "Background",
-        "value": "Blue"
-      }
-    ]
-  }
+  "name": "Octopus Omnes",
+  "image": "https://bafybeibfmajo6x63h3gef5dnxyopnhkqigtv45urf2s4ut2hyb672omc3i.ipfs.nftstorage.link",
+  "attributes": [
+    {
+      "trait_type": "Species",
+      "value": "Octopus"
+    },
+    {
+      "trait_type": "Head",
+      "value": "Hacker"
+    },
+    {
+      "trait_type": "Special Omnes Protocol",
+      "value": ""
+    },
+    {
+      "trait_type": "Body",
+      "value": "Recommendation Tentacles"
+    },
+    {
+      "trait_type": "Background",
+      "value": "Blue"
+    }
+  ]
+}

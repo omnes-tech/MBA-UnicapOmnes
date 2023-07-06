@@ -18,7 +18,6 @@ contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
 
     address public refundAddress;
     uint256 public constant maxUserMintAmount = 5;
-    
 
     mapping(uint256 => uint256) public refundEndBlockNumbers;
     uint256 public presaleRefundEndBlockNumber;
@@ -34,16 +33,10 @@ contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
         presaleRefundEndBlockNumber = refundEndBlockNumber;
     }
 
-    function preSaleMint(uint256 quantity)
-        external
-        payable
-    {
+    function preSaleMint(uint256 quantity) external payable {
         require(presaleActive, "Presale is not active");
         require(msg.value == quantity * mintPrice, "Value");
-        require(
-            _numberMinted(msg.sender) + quantity <= maxUserMintAmount,
-            "Max amount"
-        );
+        require(_numberMinted(msg.sender) + quantity <= maxUserMintAmount, "Max amount");
         require(_totalMinted() + quantity <= maxMintSupply, "Max mint supply");
 
         _safeMint(msg.sender, quantity);
@@ -52,14 +45,8 @@ contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
     function publicSaleMint(uint256 quantity) external payable {
         require(publicSaleActive, "Public sale is not active");
         require(msg.value >= quantity * mintPrice, "Not enough eth sent");
-        require(
-            _numberMinted(msg.sender) + quantity <= maxUserMintAmount,
-            "Over mint limit"
-        );
-        require(
-            _totalMinted() + quantity <= maxMintSupply,
-            "Max mint supply reached"
-        );
+        require(_numberMinted(msg.sender) + quantity <= maxUserMintAmount, "Over mint limit");
+        require(_totalMinted() + quantity <= maxMintSupply, "Max mint supply reached");
 
         _safeMint(msg.sender, quantity);
         refundEndBlockNumber = block.number + refundPeriod;
@@ -69,10 +56,7 @@ contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
     }
 
     function ownerMint(uint256 quantity) external onlyOwner {
-        require(
-            _totalMinted() + quantity <= maxMintSupply,
-            "Max mint supply reached"
-        );
+        require(_totalMinted() + quantity <= maxMintSupply, "Max mint supply reached");
         _safeMint(msg.sender, quantity);
 
         for (uint256 i = _nextTokenId() - quantity; i < _nextTokenId(); i++) {
@@ -91,7 +75,7 @@ contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
         Address.sendValue(payable(msg.sender), refundAmount);
     }
 
-    function refundDeadlineOf(uint256 tokenId) public override view returns (uint256) {
+    function refundDeadlineOf(uint256 tokenId) public view override returns (uint256) {
         if (isOwnerMint[tokenId]) {
             return 0;
         }
@@ -101,7 +85,7 @@ contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
         return refundEndBlockNumbers[tokenId];
     }
 
-    function refundOf(uint256 tokenId) public override view returns (uint256) {
+    function refundOf(uint256 tokenId) public view override returns (uint256) {
         if (isOwnerMint[tokenId]) {
             return 0;
         }
@@ -120,7 +104,6 @@ contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
     function _baseURI() internal view override returns (string memory) {
         return baseURI;
     }
-
 
     function setBaseURI(string memory uri) external onlyOwner {
         baseURI = uri;

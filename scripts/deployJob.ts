@@ -1,12 +1,13 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const IPFS = "https://bafkreia3mz2vnxe4xzmzyclnooazeuoasn2eghx7krc5qqnzknukxcgzwe.ipfs.nftstorage.link";
+  const IPFS =
+    "https://bafkreia3mz2vnxe4xzmzyclnooazeuoasn2eghx7krc5qqnzknukxcgzwe.ipfs.nftstorage.link";
   const nome = "OmnesMentoring";
   const symbol = "OMNESM";
-//"https://ipfs.io/ipfs/CID.json"
+  //"https://ipfs.io/ipfs/CID.json"
   const NFT = await ethers.getContractFactory("Job");
-  const nft = await NFT.deploy(IPFS,0,0, nome, symbol);
+  const nft = await NFT.deploy(IPFS, 0, 0, nome, symbol);
 
   await nft.deployed();
 

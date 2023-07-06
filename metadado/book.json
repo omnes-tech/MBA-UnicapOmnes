@@ -1,0 +1,15 @@
+{
+  "name": "Book-StoreMBA",
+  "image": "https://ipfs.io/ipfs/bafybeiezodviydmini2tsafziatfpy7sw7xrayqfsttxyvrjjxqdssyjhq/Book.jpg",
+  "external_link": "https://www.linkedin.com/company/omnes-blockchain-tech/",
+  "attributes": [
+    {
+      "trait_type": "Book",
+      "value": "MBA-Unicap"
+    },
+    {
+      "trait_type": "Genesys",
+      "value": "Hackers"
+    }
+  ]
+}

@@ -7,8 +7,7 @@ pragma solidity ^0.8.19;
  * @dev Standard math utilities missing in the Solidity language.
  */
 library Math {
-     
-     //tente adicionar os dois valores
+    //tente adicionar os dois valores
     function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         unchecked {
             uint256 c = a + b;
@@ -16,6 +15,7 @@ library Math {
             return (true, c);
         }
     }
+
     //tente subtrair
     function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         unchecked {
@@ -24,7 +24,7 @@ library Math {
         }
     }
 
-    //tente multiplicar 
+    //tente multiplicar
     function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {
         unchecked {
             // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
@@ -47,7 +47,7 @@ library Math {
 
     // me retorne o valor máximo entre os inseridos
     //A expressão “a > b” é uma condição que verifica se “a” é maior que “b”. Se essa condição for verdadeira, a expressão retorna o valor de “a”, caso contrário, ela retorna o valor de “b”.
-//Então, se “a” for maior que “b”, a expressão retornará o valor de “a”, caso contrário, ela retornará o valor de “b”.
+    //Então, se “a” for maior que “b”, a expressão retornará o valor de “a”, caso contrário, ela retornará o valor de “b”.
     function max(uint256 a, uint256 b) internal pure returns (uint256) {
         return a > b ? a : b;
     }
@@ -56,5 +56,4 @@ library Math {
     function min(uint256 a, uint256 b) internal pure returns (uint256) {
         return a < b ? a : b;
     }
-
- }
+}

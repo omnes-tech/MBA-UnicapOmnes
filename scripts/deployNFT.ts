@@ -1,7 +1,8 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const IPFS = "https://bafkreig2xnzfhpgdqgz4tnsgzdx2y6svimng3a7h76mr2dnxs7ieihuwqy.ipfs.nftstorage.link";
+  const IPFS =
+    "https://bafkreig2xnzfhpgdqgz4tnsgzdx2y6svimng3a7h76mr2dnxs7ieihuwqy.ipfs.nftstorage.link";
   const nome = "Omnes Octopus";
   const symbol = "OMNESCTO";
 

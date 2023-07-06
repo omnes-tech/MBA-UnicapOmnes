@@ -7,7 +7,7 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
 // These libraries were replaced and contract extended with Initializable, UUPSUpgradeable
-contract UpgradeMBA is Initializable, UUPSUpgradeable, ERC1155Upgradeable, OwnableUpgradeable { 
+contract UpgradeMBA is Initializable, UUPSUpgradeable, ERC1155Upgradeable, OwnableUpgradeable {
     mapping(uint256 => string) public tokenURI;
     uint256 public tokenId;
 
@@ -15,12 +15,11 @@ contract UpgradeMBA is Initializable, UUPSUpgradeable, ERC1155Upgradeable, Ownab
         _disableInitializers();
     }
 
-    function initialize() initializer public{
-   __ERC1155_init("");
-   __Ownable_init();
-   __UUPSUpgradeable_init();
-}
-
+    function initialize() public initializer {
+        __ERC1155_init("");
+        __Ownable_init();
+        __UUPSUpgradeable_init();
+    }
 
     function _authorizeUpgrade(address _newImplementation) internal override onlyOwner {}
 
@@ -36,12 +35,7 @@ contract UpgradeMBA is Initializable, UUPSUpgradeable, ERC1155Upgradeable, Ownab
         return _tokenId;
     }
 
-    function uri(uint256 _tokenId)
-        public
-        view
-        override
-        returns (string memory)
-    {
+    function uri(uint256 _tokenId) public view override returns (string memory) {
         return tokenURI[_tokenId];
     }
 }

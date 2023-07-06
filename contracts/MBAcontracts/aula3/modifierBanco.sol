@@ -1,68 +1,60 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
+contract BancoModificadores {
+    //variáveis globais e estáveis
+    address public donoContrato;
+    uint256 public valorMinDeposito = 1 ether;
+    bool public pause;
 
-contract BancoModificadores{
+    mapping(address => uint256) public Saldo;
+    mapping(address => bool) SaiudoBC3W;
 
-//variáveis globais e estáveis
-address public donoContrato;
-uint public valorMinDeposito = 1 ether;
-bool public pause;
+    constructor() {
+        donoContrato = msg.sender; //0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
+    }
 
-mapping(address => uint256) public Saldo;
-mapping(address => bool) SaiudoBC3W;
+    function depositar() external payable Pausado BCbaniu {
+        require(msg.value >= valorMinDeposito, "o valor minimo tem que ser 1 ether");
+        uint256 fee = (msg.value / 100) * 2; //2%
+        uint256 ContratobancoCliente = msg.value - fee;
+        Saldo[msg.sender] += ContratobancoCliente;
 
-constructor() {
-    donoContrato = msg.sender; //0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-}
+        //Regras de transferencia dos valores
+        payable(donoContrato).transfer(fee);
+        payable(address(this)).transfer(ContratobancoCliente);
+    }
 
-function depositar()external payable Pausado BCbaniu{
-    require(msg.value >= valorMinDeposito, "o valor minimo tem que ser 1 ether");
-    uint256 fee = msg.value/100 *2; //2%
-    uint ContratobancoCliente = msg.value - fee;
-    Saldo[msg.sender] += ContratobancoCliente;
+    receive() external payable {}
 
-    //Regras de transferencia dos valores
-    payable(donoContrato).transfer(fee);
-    payable(address(this)).transfer(ContratobancoCliente);
+    //vai retirar o valor todo que está no contrato
+    function RetirarValorDonoBanco() external payable Pausado SomenteDono {
+        payable(msg.sender).transfer(address(this).balance);
+    }
 
-}
+    function SairdoBanco() external payable Pausado {
+        require(msg.value <= Saldo[msg.sender], "ta querendo mais?? Pode nao");
+        uint256 meuSaldoTodo = Saldo[msg.sender];
+        SaiudoBC3W[msg.sender] = true;
+        payable(msg.sender).transfer(meuSaldoTodo);
+    }
 
-receive() external payable{
-}
+    function pausarDespausar(bool _booliana) external SomenteDono {
+        pause = _booliana;
+    }
 
-//vai retirar o valor todo que está no contrato
-function RetirarValorDonoBanco() external payable Pausado SomenteDono{
-    payable(msg.sender).transfer(address(this).balance);
-}
+    modifier SomenteDono() {
+        require(msg.sender == donoContrato, "voce nao e o Dono");
+        _;
+    }
 
-function SairdoBanco() external payable Pausado{
-    require(msg.value <= Saldo[msg.sender], "ta querendo mais?? Pode nao");
-    uint meuSaldoTodo = Saldo[msg.sender];
-    SaiudoBC3W[msg.sender]=true;
-    payable(msg.sender).transfer(meuSaldoTodo);
-}
+    modifier Pausado() {
+        require(!pause, "contrato pausado"); //se não for falso -- si ne qua non
+        _;
+    }
 
-function pausarDespausar(bool _booliana)external SomenteDono {
-    pause = _booliana;
-}
-
-
-modifier SomenteDono(){
-require(msg.sender == donoContrato, "voce nao e o Dono");
-_;
-}
-
-modifier Pausado(){
-    require(!pause, "contrato pausado"); //se não for falso -- si ne qua non
-    _;
-}
-
-modifier BCbaniu(){
-    require(!SaiudoBC3W[msg.sender], "Cancelou e raspou a conta se deu mal"); //se não for falso
-    _;
-}
-
-
-
+    modifier BCbaniu() {
+        require(!SaiudoBC3W[msg.sender], "Cancelou e raspou a conta se deu mal"); //se não for falso
+        _;
+    }
 }

@@ -7,7 +7,6 @@ pragma solidity ^0.8.0;
  * @dev External interface of IMentoring
  */
 interface IMentoring {
-
     // =============================================================
     //                         STRUCTS AND ENUNS
     // =============================================================
@@ -19,7 +18,7 @@ interface IMentoring {
         @param approved: Approval status for mentoring. If true, it was approved and we will contact you
         */
 
-    struct aboutMentoring{
+    struct aboutMentoring {
         uint256 definiteHours;
         string name;
         string email;
@@ -58,5 +57,4 @@ interface IMentoring {
      * @dev Returns the information from mentees to the operator.
      */
     function mentoringData(address _mentored) external view returns (aboutMentoring memory);
-
-} 
+}

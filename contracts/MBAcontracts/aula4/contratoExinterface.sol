@@ -1,31 +1,31 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import {ContratoInterface} from "./interfaceEx.sol";
+import { ContratoInterface } from "./interfaceEx.sol";
 import "./abstrato.sol";
 
 // Contrato que usa a interface e contrato abstrato
 //os dois tipos de contrato não podem ser implementados (DEPLOYADOS) são só uma base de recursos que podemos ou devemos usar
-contract ContratoPrincipal is ContratoInterface, Dados{
+contract ContratoPrincipal is ContratoInterface, Dados {
     Dados public dados;
 
-    uint valordepositado;
+    uint256 valordepositado;
 
     //FUNÇÕES OBRIGATÓRIAS PARA REALIZAR A SUBSTITUIÇÃO DA INTERFACE =>
 
     //podemos importar as definições da interface no contrato principal assim armazenando todos os dados nesse contrato
-    function depositar(uint256 valor) external override(ContratoInterface){
+    function depositar(uint256 valor) external override(ContratoInterface) {
         valordepositado += valor;
     }
 
-    function consultarSaldo() external view virtual override returns(uint256){
+    function consultarSaldo() external view virtual override returns (uint256) {
         return valordepositado;
     }
 
-    //quando utilizamos uma interface devemos chamar todas as funções delimitadas nele 
+    //quando utilizamos uma interface devemos chamar todas as funções delimitadas nele
     //utilizando OVERRIDE
     //mute a função e vejamos que vai aparecer um erro
-    function sacar(uint256 valor) external override{
+    function sacar(uint256 valor) external override {
         valordepositado -= valor;
     }
 
@@ -33,9 +33,7 @@ contract ContratoPrincipal is ContratoInterface, Dados{
 
     //abstrato -- Exmplo de que não conseguimos modificar nada no contrato abstrato por esse contrato
 
-    function setarIdadenoAbstrato(uint256 _idade)external {
+    function setarIdadenoAbstrato(uint256 _idade) external {
         dados.setarIdade(_idade);
     }
-    
-
 }

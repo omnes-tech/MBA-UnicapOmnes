@@ -1,28 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-
-contract ExemplosArrays{
-
-    
+contract ExemplosArrays {
     string[4] public Alunos; //0,1,2,3,4 -- esse é o limite
     string[] public DisciplinaNome; //dinamica 0,1,2....
     string[][] private MatrizesDiscProf; //
 
-
     //inserir nome da disciplina...
-    function definirDisciplina(string memory nomeD) external{
+    function definirDisciplina(string memory nomeD) external {
         DisciplinaNome.push(nomeD);
     }
 
     //Excluir nome da disciplina...
-    function deletarElemento(uint numeroD) external {
+    function deletarElemento(uint256 numeroD) external {
         delete DisciplinaNome[numeroD];
     }
 
     //Definir nome de aluno e por número...
-    function definirAluno(uint8 num, string memory novoAluno) external{
-        Alunos[num]=novoAluno;
+    function definirAluno(uint8 num, string memory novoAluno) external {
+        Alunos[num] = novoAluno;
     }
 
     //Definir multidimenções para diciplina do professor
@@ -34,15 +30,19 @@ contract ExemplosArrays{
     //nova gaveta 1:
     //linha 1 coluna 0 --- outra disciplina
     //linha 1 coluna 1 -- outro professor
-    function definirProfeDiciplina(string memory disciplina, string memory professor)external {
-        MatrizesDiscProf.push([disciplina,professor]);  
+    function definirProfeDiciplina(string memory disciplina, string memory professor) external {
+        MatrizesDiscProf.push([disciplina, professor]);
     }
 
     //retornar multidimenções
     //
-    function RetornarProfIndiceDisci(uint Indicedisciplina, uint IndiceProf)external view returns(string memory){
+    function RetornarProfIndiceDisci(uint256 Indicedisciplina, uint256 IndiceProf)
+        external
+        view
+        returns (string memory)
+    {
         return MatrizesDiscProf[Indicedisciplina][IndiceProf];
     }
-    //indice [0] -- nessa (primeira linha da matriz) caixa vai guardar a disciplinas 
+    //indice [0] -- nessa (primeira linha da matriz) caixa vai guardar a disciplinas
     //       [1] -- na segunda dimensão vai guardar os professores
 }
