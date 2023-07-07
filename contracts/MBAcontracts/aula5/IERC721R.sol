@@ -18,10 +18,6 @@ interface IERC721R is IERC721A {
     /// @param  tokenId The `tokenId` to refund
     function refund(uint256 tokenId) external;
 
-    /// @notice         Gets the refund price of the specific `tokenId`
-    /// @param  tokenId The `tokenId` to query
-    /// @return _wei    The amount of ether (in wei) that would be refunded
-    function refundOf(uint256 tokenId) external view returns (uint256 _wei);
 
     /// @notice         Gets the first block for which the refund is not active for a given `tokenId`
     /// @param  tokenId The `tokenId` to query
