@@ -58,7 +58,7 @@ contract NFTAula is
         require(msg.value >= cost, "Insufficient funds!"); //requisição que verifica se o valor enviado na transação pe igual ou maior ao custo do NFT
         _safeMint(to, _quantity); //função importada do ERC721A que registra para onde vai e quantidade do NFT mintado
         //no ERC721A já possue o contabilização no próprio contrato que herdamos
-    }
+    } // a contagem do padrão ERC721A começa no 0
 
     function _baseURI() internal view virtual override returns (string memory) {
         //demos o override na função do ERC721A

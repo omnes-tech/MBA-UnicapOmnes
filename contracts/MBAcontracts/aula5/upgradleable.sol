@@ -13,6 +13,11 @@ contract UpgradeMBA is Initializable, UUPSUpgradeable, ERC1155Upgradeable, Ownab
 
     constructor() {
         _disableInitializers();
+        /*No entanto, quando você atualiza um contrato inteligente usando o padrão UUPSUpgradeable, você não quer que os inicializadores sejam executados novamente. Isso porque os inicializadores podem alterar 
+        as variáveis do contrato inteligente e causar problemas com a atualização. 
+        Ao usar a função _disableInitializers(), você pode desativar os inicializadores 
+        do contrato inteligente e garantir que eles não sejam executados 
+        novamente durante uma atualização.*/
     }
 
     function initialize() public initializer {
@@ -22,7 +27,7 @@ contract UpgradeMBA is Initializable, UUPSUpgradeable, ERC1155Upgradeable, Ownab
     }
 
     function _authorizeUpgrade(address _newImplementation) internal override onlyOwner {}
-
+    
     function mint(
         uint256 amount,
         string memory _tokenURI,

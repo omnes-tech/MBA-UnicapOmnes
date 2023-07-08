@@ -3,26 +3,27 @@ pragma solidity ^0.8.0;
 
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Multicall.sol";
 import "erc721a/contracts/ERC721A.sol";
 import "./IERC721R.sol";
 
-contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
+contract ERC721RExample is ERC721A, IERC721R, Ownable {
     uint256 public constant maxMintSupply = 8000;
     uint256 public constant mintPrice = 1 ether;
-    uint256 public constant refundPeriod = 30 seconds;
+    uint256 public constant refundPeriod = 30 seconds; //tempo para fazer o refound
 
-    // Sale Status
+    // Sale Status -- status de vendas
     bool public publicSaleActive;
     bool public presaleActive;
 
-    address public refundAddress;
-    uint256 public constant maxUserMintAmount = 5;
+    address public refundAddress; //--para onde vai os NFTs que são devolvidos
+    uint256 public constant maxUserMintAmount = 5; //--numero máximo de mint por usuário
 
-    mapping(uint256 => uint256) public refundEnd;
-    mapping(address => uint256) public valueRefund;
-    uint256 public presaleRefundEnd;
-    uint256 public refundEndtimestamp;
+    mapping(uint256 => uint256) public refundEnd;//mapping referente ao ID do refund e o tempo para realizar
+    mapping(address => uint256) public valueRefund;//valor de refound para o endereço
+
+    uint256 public presaleRefundEnd;//tempo definido para o refund na pre sale
+    uint256 public refundEndtimestamp;//final do prazo de refound
+
     mapping(uint256 => bool) public hasRefunded; // users can search if the NFT has been refunded
     mapping(uint256 => bool) public isOwnerMint; // if the NFT was freely minted by owner
 
@@ -62,6 +63,8 @@ contract ERC721RExample is ERC721A, IERC721R, Ownable, Multicall {
         require(_totalMinted() + quantity <= maxMintSupply, "Max mint supply reached");
         _safeMint(msg.sender, quantity);
 
+    //armazena todos os Ids mintados pelo dono e conseguimos veriicar depois se ele mintou retornando como true
+    //O incremento é executado após cada iteração do loop e atualiza o valor da variável de controle.
         for (uint256 i = _nextTokenId() - quantity; i < _nextTokenId(); i++) {
             isOwnerMint[i] = true;
         }

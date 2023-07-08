@@ -18,6 +18,7 @@ contract NFT is ERC721, Ownable {
     uint256 public currentTokenId;
     uint256 public constant TOTAL_SUPPLY = 10_000;
 
+    //omnes protocol
     uint256 public price;
     uint256 public maxDiscount;
 
